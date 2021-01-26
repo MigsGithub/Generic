@@ -2,3 +2,13 @@ form.signup,
 form.login {
   margin-top: 50px;
 }
+
+
+body{
+  background: url(/images/readme.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;  
+  color: white;
+  }
