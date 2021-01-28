@@ -1,0 +1,40 @@
+form.signup,
+form.login {
+  margin-top: 50px;
+}
+
+
+body{
+  background: url(/images/readme.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;  
+  color: white;
+  }
+/* email and password text on the signup and login page */
+.specTextTitle{
+  color: rgb(24, 214, 157);
+  font-size: 40px;
+  font-weight: bold;
+  background: rgba(5, 2, 2, 0.473);
+  width: fit-content;
+  border-radius: 10px;
+}
+  .specText{
+    background-color: rgba(0, 0, 0, 0.575);
+    color:white;
+    font-size: 30px;
+    font-weight: 900;
+  }
+  .formText{
+    color: rgb(255, 255, 255);
+  }
+
+  div {
+    text-shadow: 0 0 80px rgba(228, 174, 112, 0.719),0 0 30px rgb(4, 17, 20),0 0 6px rgb(226, 213, 21);
+  
+  }
+  #hereTag{
+    color: rgb(0, 255, 55);
+  }

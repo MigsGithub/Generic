@@ -1,0 +1,33 @@
+.bg-primary {
+    background: linear-gradient(90deg, #440c1a, grey) !important
+}
+
+.my-icon {
+    font-size: 80px !important;
+    color: #440c1a;
+}
+
+.service-container {
+    border: .5px solid #440c1a;
+    padding: 25px;
+    cursor: pointer;
+    transition: 200ms all ease-in-out;
+}
+
+.service-container:hover {
+    background: black;
+    color: white;
+    border-radius: 20px;
+}
+
+.collection :hover {
+    background-color: #440c1a !important;
+    color: white;
+    cursor: pointer;
+}
+
+.collection-item {
+    color: black;
+    cursor: pointer;
+}
+
