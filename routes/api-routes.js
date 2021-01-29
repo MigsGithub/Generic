@@ -1,6 +1,8 @@
 // Requiring our models and passport as we've configured it
 var db = require("../models");
 var passport = require("../config/passport");
+const { listenerCount } = require("process");
+const sharedLibrary = require("../models/sharedLibrary");
 
 module.exports = function(app) {
   // Using the passport.authenticate middleware with our local strategy.
@@ -47,3 +49,20 @@ module.exports = function(app) {
     }
   });
 };
+
+// this is going to trigger the search function to search for 
+// app.get("/api/search", function(req, res) {
+
+// });
+
+// app.get("/api/add_book", function(req, res){
+
+// });
+
+
+// search for a book
+// add a book to read list 
+// remove a book from read list
+// check out a book from the sharedLibrary
+// check a book back into the sharedLibrary
+// mark a book as read
