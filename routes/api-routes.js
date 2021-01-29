@@ -55,14 +55,58 @@ module.exports = function(app) {
 
 // });
 
-// app.get("/api/add_book", function(req, res){
+// this is going to add the book to the readlist
+app.get("/api/add_book_readlist", function(req, res){
+  db.ReadList.create({
+    title: req.body.title,
+    author: req.body.author,
+    isdn: req.body.isdn
+  })
+    .catch(function(err) {
+      res.status(500).json(err);
+    });
+});
+
+// this is going to add the book to the sharedlibrary
+app.get("/api/add_book_shared", function(req, res){
+  db.SharedLibrary.create({
+    title: req.body.title,
+    author: req.body.author,
+    isdn: req.body.isdn
+  })
+  .catch(function(err) {
+    res.status(500).json(err);
+  });
+});
+
+//check out a book
+app.put("/api/checkout", function(req, res){
+  if (!req.body.sharedLibrary.checkedOut) {
+    db.SharedLibrary.update(
+      db.SharedLibrary.checkedOut = true,
+      {
+      where: {
+        title: req.body.title
+      }
+    }).then(function(CheckedOut) {
+      res.json(CheckedOut)
+    })        
+  };
+});
+
+// check a book back into the sharedLibrary
+// app.get("/api/checkout", function(req, res){
 
 // });
 
-
-// search for a book
-// add a book to read list 
-// remove a book from read list
-// check out a book from the sharedLibrary
-// check a book back into the sharedLibrary
 // mark a book as read
+// app.put("/api/checkin", function(req, res){
+
+// });
+
+// remove a book from read list
+app.get("/api/remove_book", function(req, res){
+  db.ReadList.destroy()
+})
+
+
