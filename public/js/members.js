@@ -4,4 +4,7 @@ $(document).ready(function() {
   $.get("/api/user_data").then(function(data) {
     $(".member-name").text(data.email);
   });
+  $.get("https://www.googleapis.com/books/v1/volumes?q=search+terms").then(function(data) {
+    console.log(data)
+  });
 });

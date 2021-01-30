@@ -1,12 +1,26 @@
 .bg-primary {
-    background: linear-gradient(90deg, #440c1a, grey) !important
+    background: linear-gradient(90deg, #000000, rgb(0, 0, 0)) !important
 }
-
+.bg-primary2 {
+    background: linear-gradient(90deg, #ec0505, rgb(243, 3, 3), rgb(248, 7, 7)) !important
+}
 .my-icon {
     font-size: 80px !important;
-    color: #440c1a;
+    color: #c04564;
 }
 
+.imageText1{
+    color: rgb(244, 245, 244);
+    margin-top: 75px;
+    background-color: black;
+    margin-bottom: 0;
+    
+}
+.firstPageText{
+    margin-top: 0;
+    color: rgb(255, 255, 255);
+    background-color: rgb(0, 0, 0);
+}
 .service-container {
     border: .5px solid #440c1a;
     padding: 25px;
@@ -30,4 +44,29 @@
     color: black;
     cursor: pointer;
 }
+#textarea1{
+    background-color: white;
+}
 
+#littleLogo{
+    height: 40px;
+    margin-right: 10px;
+}
+.letterN{
+    height: 70px;
+}
+.firsttOutline{
+    margin-top: 30px;
+    border-width: 3px;
+  border-style: solid;
+  border-image: 
+    linear-gradient(
+      to top,rgb(123, 255, 0), rgb(238, 0, 32), rgba(153, 76, 130)) 1 100%;
+}
+/* personal library logo  */
+.personalLibrary{
+    height: 50px;
+    margin-top: 20px;
+    margin-bottom: 0;
+
+}
