@@ -8,34 +8,63 @@
 //     console.log(data)
 //   });
 // });
+$(document).ready(function () {
 
-$("#textarea1").on("submit", function(event) {
-  event.preventDefault();
+  $("#submit").on("click", function (event) {
+    event.preventDefault();
 
-  var newBook = {
-    title: $("#textarea1").val(),
-  };
+    var newBook = {
+      title: $("#book").val(),
+    };
+    
+    console.log(newBook.title);
+    // after clicking, this should book should be added to the readlist
 
-  console.log(newBook);
 
-  // Send the POST request.
-  // $.ajax("/api/burgers", {
-  //   type: "POST",
-  //   data: newBurger
-  // }).then(
-  //   function() {
-  //     console.log("created new cat");
-  //     // Reload the page to get the updated list
-  //     location.reload();
-  //   }
-  // );
+    // Send the POST request.
+    $.ajax("/api/books", {
+      type: "POST",
+      data: newBook
+    }).then(
+      function() {
+        console.log("created new book");
+        // Reload the page to get the updated list
+        location.reload();
+      }
+    );
+  
+  });
+
+
+
 });
 
 
+// Leave this alone... Its Materialize initiation code
+$(document).ready(function () {
+  document.addEventListener('DOMContentLoaded', function () {
+      var elems = document.querySelectorAll('.sidenav');
+      var instances = M.Sidenav.init(elems, options);
+  });
+
+  // Initialize collapsible (uncomment the lines below if you use the dropdown variation)
+  // var collapsibleElem = document.querySelector('.collapsible');
+  // var collapsibleInstance = M.Collapsible.init(collapsibleElem, options);
+
+  // Or with jQuery
+
+  $(document).ready(function () {
+      $('.sidenav').sidenav({
+          edge: "right"
+      });
+      $('.parallax').parallax();
+  })
+  $.get("https://www.googleapis.com/books/v1/volumes?q=Robin+intitle").then(function (data) {
+      console.log(data)
+  });
 
 
-
-
+});
 
 
 
