@@ -70,4 +70,17 @@
     margin-bottom: 0;
 
 }
-
+.sharedButton{
+    margin-top: 20px;
+    background-color: red;
+}
+.sharedExplain{
+    font-size: 30px;
+}
+.shareWelcome{
+    font-size: 100px;
+    color: white;
+    font-weight: 700;
+    background-color: rgb(7, 5, 2);
+    margin-top: 0;
+}
