@@ -48,7 +48,7 @@ module.exports = function(app) {
       });
     }
   });
-  // mark a book as read
+  // mark a book as read/unread
   app.put("/api/read", function(req, res){
     db.ReadList.update(
       db.ReadList.read = !db.ReadList.read,
@@ -77,6 +77,17 @@ module.exports = function(app) {
     db.ReadList.findAll({}).then(function(allBooks){res.json(allBooks)});
   });
 
+  // remove a book from read list
+
+  app.get("/api/remove_book", function(req, res){
+    db.ReadList.destroy({
+      where: {
+        title: req.body.title
+      }
+    }).then(function(delBook){
+      res.json(delBook)
+    });
+  });
 };
 
 // this is going to add the book to the sharedlibrary
@@ -113,11 +124,6 @@ module.exports = function(app) {
 // app.get("/api/checkout", function(req, res){
 
 // });
-
-// remove a book from read list
-// app.get("/api/remove_book", function(req, res){
-//   db.ReadList.destroy()
-// })
 
 // git all books from Book
 // app.get("/api/get_shared", function(req, res) {
