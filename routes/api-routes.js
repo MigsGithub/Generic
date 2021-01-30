@@ -2,7 +2,7 @@
 var db = require("../models");
 var passport = require("../config/passport");
 const { listenerCount } = require("process");
-const sharedLibrary = require("../models/sharedLibrary");
+const sharedLibrary = require("../models/books.js");
 
 module.exports = function(app) {
   // Using the passport.authenticate middleware with our local strategy.
@@ -48,65 +48,79 @@ module.exports = function(app) {
       });
     }
   });
+  // mark a book as read
+  app.put("/api/read", function(req, res){
+    db.ReadList.update(
+      db.ReadList.read = !db.ReadList.read,
+      { where: {
+          title: req.body.title
+        }
+      }).then(function(readList){
+        res.json(readList)
+      })
+  });
+
+  // this is going to add the book to the readlist
+  app.get("/api/add_book_readlist", function(req, res){
+    db.ReadList.create({
+      title: req.body.title,
+      author: req.body.author,
+      isdn: req.body.isdn
+    })
+      .catch(function(err) {
+        res.status(500).json(err);
+      });
+  });
+
+  // this route gets the read list.
+  app.get("/api/get_list", function(req, res) {
+    db.ReadList.findAll({}).then(function(allBooks){res.json(allBooks)});
+  });
+
 };
 
-// this is going to trigger the search function to search for 
-// app.get("/api/search", function(req, res) {
-
+// this is going to add the book to the sharedlibrary
+// app.get("/api/add_book_shared", function(req, res){
+//   db.Book.create({
+//     title: req.body.title,
+//     author: req.body.author,
+//     isdn: req.body.isdn
+//   })
+//   .catch(function(err) {
+//     res.status(500).json(err);
+//   });
 // });
 
-// this is going to add the book to the readlist
-app.get("/api/add_book_readlist", function(req, res){
-  db.ReadList.create({
-    title: req.body.title,
-    author: req.body.author,
-    isdn: req.body.isdn
-  })
-    .catch(function(err) {
-      res.status(500).json(err);
-    });
-});
-
-// this is going to add the book to the sharedlibrary
-app.get("/api/add_book_shared", function(req, res){
-  db.SharedLibrary.create({
-    title: req.body.title,
-    author: req.body.author,
-    isdn: req.body.isdn
-  })
-  .catch(function(err) {
-    res.status(500).json(err);
-  });
-});
-
 //check out a book
-app.put("/api/checkout", function(req, res){
-  if (!req.body.sharedLibrary.checkedOut) {
-    db.SharedLibrary.update(
-      db.SharedLibrary.checkedOut = true,
-      {
-      where: {
-        title: req.body.title
-      }
-    }).then(function(CheckedOut) {
-      res.json(CheckedOut)
-    })        
-  };
-});
+// app.put("/api/checkout/", function(req, res){
+//   if (!req.body.Book.checkedOut) {
+//     db.Book.update(
+//       db.Book.checkedOut = true,
+//       {
+//       where: {
+//         title: req.body.title
+//       }
+//     }).then(function(CheckedOut) {
+//       res.json(CheckedOut)
+//     })        
+//   };
+//   else {
+//     res.json
+//   }
+// });
 
-// check a book back into the sharedLibrary
+// check a book back into the Book
 // app.get("/api/checkout", function(req, res){
 
 // });
 
-// mark a book as read
-// app.put("/api/checkin", function(req, res){
-
-// });
-
 // remove a book from read list
-app.get("/api/remove_book", function(req, res){
-  db.ReadList.destroy()
-})
+// app.get("/api/remove_book", function(req, res){
+//   db.ReadList.destroy()
+// })
 
+// git all books from Book
+// app.get("/api/get_shared", function(req, res) {
+//   db.Book.findAll({}).then(function(allBooks){res.json(allBooks)});
+// });
 
