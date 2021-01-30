@@ -10,6 +10,13 @@
 // });
 $(document).ready(function () {
 
+  var books = [];
+  // the bookContainer is grabbing the div where all the books will be listed on the read list
+  var bookContainer = $(".book-container");
+
+
+
+
   $("#submit").on("click", function (event) {
     event.preventDefault();
 
@@ -35,7 +42,25 @@ $(document).ready(function () {
   
   });
 
+  getBooks();
 
+  // This function resets the books displayed with new books from the database
+  function initializeRows() {
+    bookContainer.empty();
+    var rowsToAdd = [];
+    for (var i = 0; i < books.length; i++) {
+      rowsToAdd.push(createNewRow(books[i]));
+    }
+    bookContainer.prepend(rowsToAdd);
+  }
+
+  // This function grabs books from the database and updates the view
+  function getBooks() {
+    $.get("/api/books", function(data) {
+      books = data;
+      initializeRows();
+    });
+  }
 
 });
 
