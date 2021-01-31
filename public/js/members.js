@@ -27,17 +27,32 @@ $(document).ready(function () {
     console.log(newBook.title);
     // after clicking, this should book should be added to the readlist
 
+    var bookVal = newBook.title
+    var openLibraryUrl = `http://openlibrary.org/search.json?title=${bookVal}&limit=10`
 
     // Send the POST request.
-    $.ajax("/api/books", {
-      type: "POST",
-      data: newBook
+    $.ajax({
+      url: openLibraryUrl,
+      method: "GET"
     }).then(
-      function() {
-        console.log("created new book");
-        // Reload the page to get the updated list
-        location.reload();
+      function(e) {
+        console.log(e);
+        for (let i = 0; i < e.docs.length; i++) {
+          // console.log(e.docs[i].title)
+          let x = "'" +JSON.stringify(e.docs[i])+"'";
+          let a = `
+            <li>
+              <div>
+                <h3>${e.docs[i].title}</h3>
+                <h6>${e.docs[i].isbn[0]}</h6>
+              </div>
+              <button type="button" value=${x} class="readButton">Save to Reading List</button>
+            </li>
+          `
+          $('.list-books').append(a)
+        }
       }
+
     );
   
   });
@@ -46,13 +61,23 @@ $(document).ready(function () {
 
   // This function resets the books displayed with new books from the database
   function initializeRows() {
-    bookContainer.empty();
-    var rowsToAdd = [];
-    for (var i = 0; i < books.length; i++) {
-      rowsToAdd.push(createNewRow(books[i]));
-    }
-    bookContainer.prepend(rowsToAdd);
+    // bookContainer.empty();
+    // var rowsToAdd = [];
+    // for (var i = 0; i < books.length; i++) {
+    //   rowsToAdd.push(createNewRow(books[i]));
+    // }
+    // bookContainer.prepend(rowsToAdd);
   }
+  
+  $(document).on('click','.readButton',function(){
+  let b = $(this).val();
+  console.log(b);
+  // variables for title, auther, isbn
+  // you get all information about the book user wants to save
+  // use information to save data in MySQL
+  // once book saved -- when you go to reading my book -- you see this book
+
+})
 
   // This function grabs books from the database and updates the view
   function getBooks() {
@@ -63,6 +88,8 @@ $(document).ready(function () {
   }
 
 });
+
+
 
 
 // Leave this alone... Its Materialize initiation code
