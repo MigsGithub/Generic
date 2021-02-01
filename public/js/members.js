@@ -23,7 +23,7 @@ $(document).ready(function () {
     var newBook = {
       title: $("#book").val(),
     };
-    
+
     console.log(newBook.title);
     // after clicking, this should book should be added to the readlist
 
@@ -35,11 +35,12 @@ $(document).ready(function () {
       url: openLibraryUrl,
       method: "GET"
     }).then(
-      function(e) {
+      function (e) {
         console.log(e);
         for (let i = 0; i < e.docs.length; i++) {
           // console.log(e.docs[i].title)
-          let x = "'" +JSON.stringify(e.docs[i])+"'";
+          let x = "'" + JSON.stringify(e.docs[i]) + "'";
+          // let x = `${JSON.stringify(e.docs[i])}`
           let a = `
             <li>
               <div>
@@ -54,7 +55,7 @@ $(document).ready(function () {
       }
 
     );
-  
+
   });
 
   getBooks();
@@ -68,20 +69,28 @@ $(document).ready(function () {
     // }
     // bookContainer.prepend(rowsToAdd);
   }
-  
-  $(document).on('click','.readButton',function(){
-  let b = $(this).val();
-  console.log(b);
-  // variables for title, auther, isbn
-  // you get all information about the book user wants to save
-  // use information to save data in MySQL
-  // once book saved -- when you go to reading my book -- you see this book
 
-})
+  $(document).on('click', '.readButton', function (req, res) {
+    let b = $(this).val();
+    var bookObj = JSON.parse(b)
+
+    let newBook = {
+      title: bookObj.title,
+      author: bookObj.autor_name,
+      isdn: bookObj.isbn
+    }
+    
+    $.post("/api/add_book_readlist", newBook, () => res.status(200))
+    // variables for title, auther, isbn
+    // you get all information about the book user wants to save
+    // use information to save data in MySQL
+    // once book saved -- when you go to reading my book -- you see this book
+
+  })
 
   // This function grabs books from the database and updates the view
   function getBooks() {
-    $.get("/api/books", function(data) {
+    $.get("/api/books", function (data) {
       books = data;
       initializeRows();
     });
@@ -95,8 +104,8 @@ $(document).ready(function () {
 // Leave this alone... Its Materialize initiation code
 $(document).ready(function () {
   document.addEventListener('DOMContentLoaded', function () {
-      var elems = document.querySelectorAll('.sidenav');
-      var instances = M.Sidenav.init(elems, options);
+    var elems = document.querySelectorAll('.sidenav');
+    var instances = M.Sidenav.init(elems, options);
   });
 
   // Initialize collapsible (uncomment the lines below if you use the dropdown variation)
@@ -106,13 +115,13 @@ $(document).ready(function () {
   // Or with jQuery
 
   $(document).ready(function () {
-      $('.sidenav').sidenav({
-          edge: "right"
-      });
-      $('.parallax').parallax();
+    $('.sidenav').sidenav({
+      edge: "right"
+    });
+    $('.parallax').parallax();
   })
   $.get("https://www.googleapis.com/books/v1/volumes?q=Robin+intitle").then(function (data) {
-      console.log(data)
+    console.log(data)
   });
 
 
