@@ -76,11 +76,13 @@ $(document).ready(function () {
 
     let newBook = {
       title: bookObj.title,
-      author: bookObj.autor_name,
-      isdn: bookObj.isbn
+      author: bookObj.author_name[0],
+      isbn: bookObj.isbn[0]
     }
+
+    console.log(newBook)
     
-    $.post("/api/add_book_readlist", newBook, () => res.status(200))
+    $.post("/api/add_book_List", newBook, () => res.status(200))
     // variables for title, auther, isbn
     // you get all information about the book user wants to save
     // use information to save data in MySQL

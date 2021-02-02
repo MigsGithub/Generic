@@ -63,7 +63,8 @@ module.exports = function(app) {
   // this is going to add the book to the List
   // needs to be a post not get
   app.post("/api/add_book_List", function(req, res){
-    db.List.create()
+    console.log(req.body);
+    db.List.create(req.body)
       .then(function (data){
         res.status(200);
       })
