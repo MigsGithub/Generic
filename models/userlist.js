@@ -5,7 +5,7 @@ module.exports = function(sequelize, DataTypes) {
     // const User = sequelize.define('User', { name: DataTypes.STRING });
     // ReadList.belongsToMany(User, { through: 'UserReadList' });
     // User.belongsToMany(ReadList, { through: 'UserReadList' });
-    var UserList = sequelize.define("UserReadList", {
+    var UserList = sequelize.define("UserList", {
         userId: {
            type: DataTypes.INTEGER,
            allowNull: false,
