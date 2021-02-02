@@ -1,6 +1,6 @@
 var bcrypt = require("bcryptjs");
 module.exports = function(sequelize, DataTypes) {
-  var ReadList = sequelize.define("List", {
+  var List = sequelize.define("List", {
       title: {
           type: DataTypes.STRING,
           allowNull: false,
@@ -23,13 +23,13 @@ module.exports = function(sequelize, DataTypes) {
     });
   
     
-    // ReadList.associate = function(models) {
-    //     ReadList.hasMany(models.User, {
-    //         foreignKey: {
-    //             allowNull: false
-    //         }
-    //     });
-    // };
+    List.associate = function(models) {
+        List.belongsToMany(models.User, {
+            through: 'UserList',
+            as: "user",
+            foreignKey: "userId"
+        });
+    };
     
-    return ReadList;
+    return List;
 };
