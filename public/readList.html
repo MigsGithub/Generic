@@ -21,8 +21,8 @@
             <div class="nav-wrapper">
                 <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
 
-                <a href="#" class="brand-logo"><img style="vertical-align:middle" id="littleLogo"
-                        src="./images/littleLOGO.PNG" alt="book logo"> MVP Library</a>
+                <a href="member.html" class="brand-logo"><img style="vertical-align:middle" id="littleLogo"
+                    src="./images/littleLOGO.PNG" alt="book logo"> MVP Library</a>
 
                 <ul id="nav-mobile" class="right hide-on-med-and-down">
                     <li><a href="member.html"> <i class="material-icons left">home</i>Home</a></li>
@@ -70,13 +70,13 @@
             <div class="container firsttOutline center-align">
                 <!-- add mt-5 or pt-5  to reposition text-->
 
-                <h2 class="imageText1 center-align">New Books New Adventure's</h2>
+                <h2 class="imageText1 center-align">Search New Book's</h2>
                 <p class="firstPageText">Search your favorite books and leave reviews on the books you enjoyed the most!
                 </p>
                 <div class="row">
                     <form class="col s12">
                         <div class="row">
-                            <div class="input-field col s12">
+                            <div class="input-field col s12 " id="text">
                                 <form action="/action_page.php" id="usrform">
                                     Book Title: <input type="text" name="usrname" id="book">
                                     <input id="submit" type="submit">
@@ -94,42 +94,8 @@
     <!-- end of section 1 -->
 
     <!-- sectoin 2 -->
-    <section>
-        <div class="container">
-            <div class="container">
-                <div class="search-list">
-                    <ul class="list-books">
-                    </ul>
-                </div>
-            </div>
-
-            <h3 class="center-align">Read with me</h3>
-
-            <div class="row mt-5">
-                <div class="col s6">
-                    <div class="service-container center-align">
-                        <i class="material-icons my-icon">library_books</i>
-                        <h3>Reading List</h3>
-                        <p>This is the list of books that you have recently read</p>
-                        <a href="./readList.html"><button class="btn bg-primary2">View</button></a>
-                    </div>
-                </div>
-                <div class="col s6">
-                    <div class="service-container center-align">
-                        <i class="material-icons my-icon">storage</i>
-                        <h3>Shared Library</h3>
-                        <p>This is the site to your shared library</p>
-                        <a href="./shared.html"><button class="btn bg-primary2">View</button></a>
-                    </div>
-                </div>
-            </div>
-
-
-        </div>
-
-
-        </div>
-    </section>
+        <article class="reading-list"></article>
+        
     <!-- end of section 2 -->
 
     <!-- section 3 -->
@@ -158,6 +124,7 @@
         integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
     <script src="js/materialize.min.js"></script>
     <script src="./js/members.js"></script>
+    <script src="./js/reading.js"></script>
 </body>
 
 </html>
