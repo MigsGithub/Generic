@@ -84,3 +84,83 @@
     background-color: rgb(7, 5, 2);
     margin-top: 0;
 }
+#book{
+    background-color: rgb(255, 255, 255);
+    outline: 1px solid black;
+}
+#text{
+    font-weight: 800;
+    color: crimson;
+    
+   
+}
+
+
+/* __________________________________________________ */
+/* section with the read list information */
+.book {
+    font-family: Barlow, Helvetica, Arial, sans-serif;
+   
+}
+.book__container {
+    max-width: 700px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.book-details {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    background-color: #ffffff;
+    border: 1px solid #E9E9E9;
+    border-radius: 4px;
+    box-shadow: 0 8px 20px 0 rgb(0 0 0 / 5%);
+    padding: 20px;
+    margin-top: -50px;
+    margin-bottom: 30px;
+    box-sizing: border-box;
+}
+.book-details__left {
+    margin-right: 25px;
+}
+.book-details__right {
+    flex-grow: 1;
+}
+.book-details__title {
+    color: #111;
+    font-size: 36px;
+    font-weight: 600;
+    line-height: 43px;
+    margin: 0 0 12px 0;
+}
+.readListSesction{
+  
+}
+.readAuthor {
+    display: block;
+    font-size: 2em;
+    margin-block-start: 0.67em;
+    margin-block-end: 0.67em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+}
+.book-details__author {
+    color: #4e4e4e;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 1.5;
+    margin: 0 0px 18px;
+}
+.readTitle {
+    display: block;
+    font-size: 1.5em;
+    margin-block-start: 0.83em;
+    margin-block-end: 0.83em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+}
+
+
