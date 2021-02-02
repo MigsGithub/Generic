@@ -28,7 +28,7 @@ $(document).ready(function () {
     // after clicking, this should book should be added to the readlist
 
     var bookVal = newBook.title
-    var openLibraryUrl = `http://openlibrary.org/search.json?title=${bookVal}&limit=10`
+    var openLibraryUrl = `https://openlibrary.org/search.json?title=${bookVal}&limit=10`
 
     // Send the POST request.
     $.ajax({
@@ -42,13 +42,26 @@ $(document).ready(function () {
           let x = "'" + JSON.stringify(e.docs[i]) + "'";
           // let x = `${JSON.stringify(e.docs[i])}`
           let a = `
-            <li>
-              <div>
-                <h3>${e.docs[i].title}</h3>
-                <h6>${e.docs[i].isbn[0]}</h6>
+          <div class="book__details">
+
+          <div class="book-details">
+              <div class="book-details__left">
+                  <div class="book-details__cover">
+                      <img
+                          src="https://covers.openlibrary.org/b/isbn/${e.docs[i].isbn[0]}-M.jpg" alt="book cover">
+                  </div>
               </div>
-              <button type="button" value=${x} class="readButton">Save to Reading List</button>
-            </li>
+              <div class="book-details__right">
+                  <h1 class="book-details__title readTitle ">Title: ${e.docs[i].title}</h1>
+                  <h2 class="book-details__author readAuthor">Author: ${e.docs[i].author_name[0]}</h2>
+                  <div class="book-details__actions">
+                  ${e.docs[i].isbn[0]}
+                  <button type="button" value=${x} class="readButton">Save to Reading List</button>
+                  </div>
+              </div>
+          </div>
+          
+          </div>
           `
           $('.list-books').append(a)
         }
@@ -58,17 +71,17 @@ $(document).ready(function () {
 
   });
 
-  getBooks();
+  // getBooks();
 
   // This function resets the books displayed with new books from the database
-  function initializeRows() {
+  // function initializeRows() {
     // bookContainer.empty();
     // var rowsToAdd = [];
     // for (var i = 0; i < books.length; i++) {
     //   rowsToAdd.push(createNewRow(books[i]));
     // }
     // bookContainer.prepend(rowsToAdd);
-  }
+  // }
 
   $(document).on('click', '.readButton', function (req, res) {
     let b = $(this).val();
@@ -91,12 +104,12 @@ $(document).ready(function () {
   })
 
   // This function grabs books from the database and updates the view
-  function getBooks() {
-    $.get("/api/books", function (data) {
-      books = data;
-      initializeRows();
-    });
-  }
+  // function getBooks() {
+  //   $.get("/api/books", function (data) {
+  //     books = data;
+  //     initializeRows();
+  //   });
+  // }
 
 });
 
@@ -122,9 +135,7 @@ $(document).ready(function () {
     });
     $('.parallax').parallax();
   })
-  $.get("https://www.googleapis.com/books/v1/volumes?q=Robin+intitle").then(function (data) {
-    console.log(data)
-  });
+  
 
 
 });
