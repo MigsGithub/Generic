@@ -61,12 +61,12 @@ module.exports = function(app) {
   });
 
   // this is going to add the book to the readlist
-  app.get("/api/add_book_readlist", function(req, res){
-    db.ReadList.create({
-      title: req.body.title,
-      author: req.body.author,
-      isdn: req.body.isdn
-    })
+  // needs to be a post not get
+  app.post("/api/add_book_readlist", function(req, res){
+    db.List.create()
+      .then(function (data){
+        res.status(200);
+      })
       .catch(function(err) {
         res.status(500).json(err);
       });
