@@ -50,19 +50,19 @@ module.exports = function(app) {
   });
   // mark a book as read/unread
   app.put("/api/read", function(req, res){
-    db.ReadList.update(
-      db.ReadList.read = !db.ReadList.read,
+    db.List.update(
+      db.List.read = !db.List.read,
       { where: {
           title: req.body.title
         }
-      }).then(function(readList){
-        res.json(readList)
+      }).then(function(List){
+        res.json(List)
       })
   });
 
-  // this is going to add the book to the readlist
+  // this is going to add the book to the List
   // needs to be a post not get
-  app.post("/api/add_book_readlist", function(req, res){
+  app.post("/api/add_book_List", function(req, res){
     db.List.create()
       .then(function (data){
         res.status(200);
@@ -74,13 +74,13 @@ module.exports = function(app) {
 
   // this route gets the read list.
   app.get("/api/get_list", function(req, res) {
-    db.ReadList.findAll({}).then(function(allBooks){res.json(allBooks)});
+    db.List.findAll({}).then(function(allBooks){res.json(allBooks)});
   });
 
   // remove a book from read list
 
-  app.get("/api/remove_book", function(req, res){
-    db.ReadList.destroy({
+  app.delete("/api/remove_book", function(req, res){
+    db.List.destroy({
       where: {
         title: req.body.title
       }

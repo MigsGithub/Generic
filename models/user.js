@@ -30,13 +30,13 @@ module.exports = function(sequelize, DataTypes) {
   User.prototype.validPassword = function(password) {
     return bcrypt.compareSync(password, this.password);
   };
-  // User.associate = function(models) {
-  //   User.belongsTo(models.readLibrary, {
-  //     foreignKey: {
-  //       allowNull: false
-  //     }
-  //   });
-  // };
+  User.associate = function(models) {
+    User.belongsToMany(models.List, {
+      through: "UserList",
+      as: "List",
+      foreignKey: "listId"
+    });
+  };
 
   // Hooks are automatic methods that run during various phases of the User Model lifecycle
   // In this case, before a User is created, we will automatically hash their password
