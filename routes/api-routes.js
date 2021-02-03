@@ -81,10 +81,10 @@ module.exports = function(app) {
 
   // remove a book from read list
 
-  app.delete("/api/remove_book", function(req, res){
+  app.delete("/api/remove_book/:id", function(req, res){
     db.List.destroy({
       where: {
-        title: req.body.title
+        id: req.params.id
       }
     }).then(function(delBook){
       res.json(delBook)
@@ -92,43 +92,5 @@ module.exports = function(app) {
   });
 };
 
-// this is going to add the book to the sharedlibrary
-// app.get("/api/add_book_shared", function(req, res){
-//   db.Book.create({
-//     title: req.body.title,
-//     author: req.body.author,
-//     isdn: req.body.isdn
-//   })
-//   .catch(function(err) {
-//     res.status(500).json(err);
-//   });
-// });
-
-//check out a book
-// app.put("/api/checkout/", function(req, res){
-//   if (!req.body.Book.checkedOut) {
-//     db.Book.update(
-//       db.Book.checkedOut = true,
-//       {
-//       where: {
-//         title: req.body.title
-//       }
-//     }).then(function(CheckedOut) {
-//       res.json(CheckedOut)
-//     })        
-//   };
-//   else {
-//     res.json
-//   }
-// });
-
-// check a book back into the Book
-// app.get("/api/checkout", function(req, res){
-
-// });
-
-// git all books from Book
-// app.get("/api/get_shared", function(req, res) {
-//   db.Book.findAll({}).then(function(allBooks){res.json(allBooks)});
-// });
-
+// I need to figure out how to make this button only click on the first button
+// I also need to figure out how to delete this using the id
