@@ -37,13 +37,17 @@ $(document).ready(function () {
     
     </div>
         `
+            var element = $(a);
 
-            $("article").append(a);
 
-            $(this).on('click', function (event) {
-                event.preventDefault();
+            $("article").append(element);
+
+
+
+            element.on('click', function (event) {
 
                 deleteBook();
+                location.reload();
 
             })
 
