@@ -30,7 +30,7 @@ $(document).ready(function () {
             <h1 class="book-details__title readTitle ">${data.title}</h1>
             <h2 class="book-details__author readAuthor">${data.author}</h2>
             <div class="book-details__actions">
-                <button class="">Remove</button>
+                <button id="delete">Remove</button>
             </div>
         </div>
     </div>
@@ -40,9 +40,31 @@ $(document).ready(function () {
 
             $("article").append(a);
 
+            $(this).on('click', function (event) {
+                event.preventDefault();
+
+                deleteBook();
+
+            })
+
+
+            // grab the ID
+            function deleteBook() {
+                // var title = $(this)[0].document.body.children[3];
+                // var title2 = document.getElementsByClassName("readTitle").innerHTML
+                // console.log(title);
+                // console.log(title2);
+                var id = data.id;
+
+
+                $.ajax({
+                    method: "DELETE",
+                    url: `/api/remove_book/:${id}`
+                }).then(getBooks);
+            }
+
+
         })
     }
-
-
 
 })

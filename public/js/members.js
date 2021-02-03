@@ -21,6 +21,7 @@ $(document).ready(function () {
     }).then(
       function (e) {
         console.log(e);
+        $(".list-books").empty();
         for (let i = 0; i < e.docs.length; i++) {
           // console.log(e.docs[i].title)
           let x = "'" + JSON.stringify(e.docs[i]) + "'";
