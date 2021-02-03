@@ -75,7 +75,8 @@ module.exports = function(app) {
 
   // this route gets the read list.
   app.get("/api/get_list", function(req, res) {
-    db.List.findAll({}).then(function(allBooks){res.json(allBooks)});
+    db.List.findAll({}).then(function(allBooks)
+    {res.json(allBooks)});
   });
 
   // remove a book from read list

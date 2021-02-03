@@ -1,21 +1,5 @@
-// $(document).ready(function() {
-//   // This file just does a GET request to figure out which user is logged in
-//   // and updates the HTML on the page
-//   $.get("/api/user_data").then(function(data) {
-//     $(".member-name").text(data.email);
-//   });
-//   $.get("https://www.googleapis.com/books/v1/volumes?q=search+terms").then(function(data) {
-//     console.log(data)
-//   });
-// });
+
 $(document).ready(function () {
-
-  var books = [];
-  // the bookContainer is grabbing the div where all the books will be listed on the read list
-  var bookContainer = $(".book-container");
-
-
-
 
   $("#submit").on("click", function (event) {
     event.preventDefault();
@@ -41,7 +25,13 @@ $(document).ready(function () {
           // console.log(e.docs[i].title)
           let x = "'" + JSON.stringify(e.docs[i]) + "'";
           // let x = `${JSON.stringify(e.docs[i])}`
-          let a = `
+
+
+          // boook cover does NOT pop up on the search list but it does on the reading list html
+          var a;
+
+          if (e.isbn) {
+            a = `
           <div class="book__details">
 
           <div class="book-details">
@@ -63,6 +53,29 @@ $(document).ready(function () {
           
           </div>
           `
+          } else {
+            a = `
+            <div class="book__details">
+  
+            <div class="book-details">
+                <div class="book-details__left">
+                    <div class="book-details__cover">
+
+                    </div>
+                </div>
+                <div class="book-details__right">
+                    <h1 class="book-details__title readTitle ">Title: ${e.docs[i].title}</h1>
+                    <h2 class="book-details__author readAuthor">Author: ${e.docs[i].author_name[0]}</h2>
+                    <button type="button" value=${x} class="readButton">Save to Reading List</button>
+                    </div>
+                </div>
+            </div>
+            
+            </div>
+            `
+          }
+
+
           $('.list-books').append(a)
         }
       }
@@ -71,17 +84,6 @@ $(document).ready(function () {
 
   });
 
-  // getBooks();
-
-  // This function resets the books displayed with new books from the database
-  // function initializeRows() {
-    // bookContainer.empty();
-    // var rowsToAdd = [];
-    // for (var i = 0; i < books.length; i++) {
-    //   rowsToAdd.push(createNewRow(books[i]));
-    // }
-    // bookContainer.prepend(rowsToAdd);
-  // }
 
   $(document).on('click', '.readButton', function (req, res) {
     let b = $(this).val();
@@ -94,24 +96,15 @@ $(document).ready(function () {
     }
 
     console.log(newBook)
-    
+
     $.post("/api/add_book_List", newBook, () => res.status(200))
-    // variables for title, auther, isbn
-    // you get all information about the book user wants to save
-    // use information to save data in MySQL
-    // once book saved -- when you go to reading my book -- you see this book
 
   })
 
-  // This function grabs books from the database and updates the view
-  // function getBooks() {
-  //   $.get("/api/books", function (data) {
-  //     books = data;
-  //     initializeRows();
-  //   });
-  // }
-
 });
+
+
+
 
 
 
@@ -122,20 +115,10 @@ $(document).ready(function () {
     var elems = document.querySelectorAll('.sidenav');
     var instances = M.Sidenav.init(elems, options);
   });
-
-  // Initialize collapsible (uncomment the lines below if you use the dropdown variation)
-  // var collapsibleElem = document.querySelector('.collapsible');
-  // var collapsibleInstance = M.Collapsible.init(collapsibleElem, options);
-
-  // Or with jQuery
-
   $(document).ready(function () {
     $('.sidenav').sidenav({
       edge: "right"
     });
     $('.parallax').parallax();
   })
-  
-
-
 });
