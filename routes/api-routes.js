@@ -81,13 +81,16 @@ module.exports = function(app) {
 
   // remove a book from read list
 
-  app.delete("/api/remove_book", function(req, res){
+  app.delete("/api/remove_book/:id", function(req, res){
     db.List.destroy({
       where: {
-        title: req.body.title
+        id: req.params.id
       }
     }).then(function(delBook){
       res.json(delBook)
     });
   });
 };
+
+// I need to figure out how to make this button only click on the first button
+// I also need to figure out how to delete this using the id

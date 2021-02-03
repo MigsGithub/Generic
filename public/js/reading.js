@@ -59,7 +59,7 @@ $(document).ready(function () {
 
                 $.ajax({
                     method: "DELETE",
-                    url: `/api/remove_book/:${id}`
+                    url: `/api/remove_book/${id}`
                 }).then(getBooks);
             }
 
