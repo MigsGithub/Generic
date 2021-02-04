@@ -65,10 +65,24 @@ module.exports = function(app) {
   app.post("/api/add_book_List", function(req, res){
     console.log(req.body);
     db.List.create(req.body)
-      .then(function (data){
+      .then(async function (data){
+
+        // var thing1 = await db.User.findOne({
+        //   where: {
+        //     id: req.user.id
+        //   }
+        // })
+        const joinRow = {
+          ListId: data.id,
+          UserId: req.user.id
+        }
+        console.log(joinRow);
+        const thing2 = await db.UserList.create(joinRow)
+        console.log(thing2);
         res.status(200);
       })
       .catch(function(err) {
+        console.log(err);
         res.status(500).json(err);
       });
   });

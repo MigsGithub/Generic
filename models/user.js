@@ -33,8 +33,8 @@ module.exports = function(sequelize, DataTypes) {
   User.associate = function(models) {
     User.belongsToMany(models.List, {
       through: "UserList",
-      as: "List",
-      foreignKey: "listId"
+      // as: "List",
+      // foreignKey: "listId"
     });
   };
 
