@@ -31,7 +31,7 @@ $(document).ready(function () {
           // boook cover does NOT pop up on the search list but it does on the reading list html
           var a;
 
-          if (e.isbn) {
+          if (e.docs[i].isbn) {
             a = `
           <div class="book__details">
 
@@ -67,7 +67,7 @@ $(document).ready(function () {
                 <div class="book-details__right">
                     <h1 class="book-details__title readTitle ">Title: ${e.docs[i].title}</h1>
                     <h2 class="book-details__author readAuthor">Author: ${e.docs[i].author_name[0]}</h2>
-                    <button type="button" value=${x} class="readButton">Save to Reading List</button>
+                    <button data-isbn="${e.docs[i].isbn[0]}" data-title="${e.docs[i].title}" data-author="${e.docs[i].author_name[0]}" type="button" value=${x} class="readButton">Save to Reading List</button>
                     </div>
                 </div>
             </div>
@@ -86,14 +86,14 @@ $(document).ready(function () {
   });
 
 
-  $(document).on('click', '.readButton', function (req, res) {
-    let b = $(this).val();
-    var bookObj = JSON.parse(b)
-
+  $(document).on('click', '.readButton', function (event) {
+    // let b = $(this).val();
+    // var bookObj = JSON.parse(b)
+    
     let newBook = {
-      title: bookObj.title,
-      author: bookObj.author_name[0],
-      isbn: bookObj.isbn[0]
+      title: $(this).data("title"),
+      author: $(this).data("author"),
+      isbn: $(this).data("isbn")
     }
 
     console.log(newBook)

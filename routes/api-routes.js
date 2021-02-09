@@ -60,17 +60,48 @@ module.exports = function(app) {
       })
   });
 
-  // this is going to add the book to the List
-  // needs to be a post not get
-  app.post("/api/add_book_List", function(req, res){
+  app.post("/api/add_book_List", async function(req, res){
     console.log(req.body);
-    db.List.create(req.body)
-      .then(function (data){
-        res.status(200);
-      })
-      .catch(function(err) {
-        res.status(500).json(err);
+    
+    try {
+      const newList = await db.List.create(req.body);
+      const foundUser = await db.User.findOne({where: {id: req.user.id}});
+      await newList.addUser(foundUser);
+
+      res.status(200);
+
+    } catch(err) {
+      console.log(err);
+      res.status(500).json(err);
+    }
+  });
+
+  // Search reading list and get all of its active users
+  app.get("/api/get_list/:listId", async function(req, res) {
+    try {
+
+      // View all users who are subscribed
+      const readingList = await db.List.findOne({where: {id : req.params.listId}});
+      const allSubscribedUsers = await readingList.getUsers();
+      res.json(allSubscribedUsers);
+
+      /* 
+        Note: be sure to remove all the logic above ^^^^  if you care to use the code below.
+        If you wish to include book details along with Users in response then uncomment following:
+      */
+
+      /*
+      const allSubscribedUsersByBook = await db.List.findOne({
+        where: {id : req.params.listId},
+        include: [db.User]
       });
+      res.json(allSubscribedUsersByBook);
+      */
+
+    } catch(err) {
+      console.log(err);
+      res.status(500).json(err);
+    }
   });
 
   // this route gets the read list.

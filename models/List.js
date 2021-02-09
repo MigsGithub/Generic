@@ -26,8 +26,8 @@ module.exports = function(sequelize, DataTypes) {
     List.associate = function(models) {
         List.belongsToMany(models.User, {
             through: 'UserList',
-            as: "user",
-            foreignKey: "userId"
+            // as: "user",
+            // foreignKey: "userId"
         });
     };
     
