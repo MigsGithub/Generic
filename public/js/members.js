@@ -31,7 +31,7 @@ $(document).ready(function () {
           // boook cover does NOT pop up on the search list but it does on the reading list html
           var a;
 
-          if (e.isbn) {
+          if (e.docs[i].isbn) {
             a = `
           <div class="book__details">
 
