@@ -87,13 +87,14 @@ $(document).ready(function () {
 
 
   $(document).on('click', '.readButton', function (event) {
-    // let b = $(this).val();
-    // var bookObj = JSON.parse(b)
-    
+    let b = $(this).val();
+    var bookObj = JSON.parse(b)
+
+    console.log(bookObj.title)
     let newBook = {
-      title: $(this).data("title"),
-      author: $(this).data("author"),
-      isbn: $(this).data("isbn")
+      title: bookObj.title,
+      author: bookObj.author_name[0],
+      isbn: bookObj.isbn[0]
     }
 
     console.log(newBook)
