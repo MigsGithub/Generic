@@ -13,7 +13,7 @@ module.exports = function(sequelize, DataTypes) {
           type: DataTypes.STRING,
           allowNull: false
       },
-      isdn: {
+      isbn: {
           type: DataTypes.STRING,
           allowNull: false
       },
